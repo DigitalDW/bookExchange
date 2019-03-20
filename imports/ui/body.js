@@ -1,2 +1,3 @@
-import './body.html'
+import './templates/home.html'
 import './templates/header.html'
+import './scripts/detection.js'
