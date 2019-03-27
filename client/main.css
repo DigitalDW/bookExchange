@@ -3,6 +3,7 @@
 }
   
 #barcode-scanner canvas, #barcode-scanner video {
-    width: 100%;
+    width: 50%;
     height: auto;
+    margin: auto;
 }

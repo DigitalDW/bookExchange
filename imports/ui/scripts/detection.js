@@ -4,36 +4,40 @@ import Quagga from './quagga.js';
 
 import '../templates/detection.html'
 import '../templates/vente.html'
+import '../templates/search.html'
 
-function order_by_occurrence(arr) {
+function trierParOccurence(arr) {
     var counts = {};
     arr.forEach(function(value){
-        if(!counts[value]) {
-            counts[value] = 0;
+        if(value.length >= 10){
+            if(!counts[value]) {
+                counts[value] = 0;
+            }
+            counts[value]++;
         }
-        counts[value]++;
     });
     return Object.keys(counts).reduce((a, b) => counts[a] > counts[b] ? a : b)
 }
-  
+
 function load_quagga(){
     if (navigator.mediaDevices && typeof navigator.mediaDevices.getUserMedia === 'function') {
     console.log("works here")
-    var last_result = [];
+    let last_result = [];
     if (Quagga.initialized == undefined) {
         Quagga.onDetected(function(result) {
-            var last_code = result.codeResult.code;
-            last_result.push(last_code);
+            let last_code = result.codeResult.code;
+            if(last_code.length == 10 || last_code.length == 13){
+                last_result.push(last_code);
+                console.log(last_code)
+            }
             if (last_result.length > 20) {
-                code = order_by_occurrence(last_result);
+                code = trierParOccurence(last_result);
+                console.log(last_result)
                 last_result = []
                 Quagga.stop();
-                if(code == "9781853260919"){
-                    alert("Réussi !")
-                }else{
-                    alert(code)
-                }
-                location.reload()
+                alert(code);
+                FlowRouter.go("venteInfos",{ isbn: code });
+                //location.reload()
             }
         });
     }
@@ -47,12 +51,12 @@ function load_quagga(){
         decoder: {
             readers : ['ean_reader','ean_8_reader','code_39_reader','code_39_vin_reader','codabar_reader','upc_reader','upc_e_reader']
         }
-    },function(err) {
+    },
+    function(err) {
         if (err) { console.log(err); return }
         Quagga.initialized = true;
         Quagga.start();
     });
-  
     }
 };
 
