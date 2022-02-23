@@ -1,3 +1,9 @@
+<!--
+Page dans laquelle on injecte les templates
+-->
 <template name="home">
     {{> header}}
+    <div id="bodyBox">
+        {{> Template.dynamic template=main}}
+    </div>
 </template>

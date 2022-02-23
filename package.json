@@ -9,8 +9,13 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.1.5",
+    "all": "0.0.0",
+    "jquery-confirm": "^3.3.4",
+    "mailgun-js": "^0.22.0",
     "meteor-node-stubs": "^0.4.1",
-    "quagga": "^0.12.1"
+    "puppeteer": "^1.14.0",
+    "quagga": "^0.12.1",
+    "sweetalert2": "^8.8.3"
   },
   "meteor": {
     "mainModule": {

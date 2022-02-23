@@ -1,0 +1,121 @@
+<!--
+La page d'accueil de style "catalogue".
+-->
+<template name="mainPage">
+  {{#if loggingIn}}
+    <div class="loader"></div>
+  {{else}}   
+  {{#if currentUser}}
+  <div class="sidenav">
+    <h4>Recherche par...</h4>
+      <form id="formQuery" style="margin-right: 2%; margin-left: 2%;">
+          <div class="form-group">
+              <label>Catégorie</label>
+                  <select name="sideBarQuerySelection" id="sideBarQuerySelection" style="width:175%">
+                    <option selected>Titre</option>
+                    <option>Auteur/e</option>
+                    <option>Professeur/e</option>
+                  </select>
+          </div>
+
+          <div class="form-group">
+              <label>Champ de recherche</label>
+              <div class="input-group-sm">
+                  <input type="text" class="form-control" placeholder="Tapez votre recherche ici..." name="sideBarQuery" style="width:175%">
+              </div>
+          </div>
+
+          <div class="form-group">
+            <label>Section UNIL</label>
+            <div class="input-group-sm">
+              <select name="sideBarFaculty" class="form-control-sm" style="width:175%">
+                  <option selected>Indifférent</option>
+                  <option>Autre</option>
+                  <option>Allemand</option>
+                  <option>Anglais</option>
+                  <option>Archéologie et sciences de l'Antiquité</option>
+                  <option>Biologie</option>
+                  <option>Comportement organisationnel</option>
+                  <option>Comptabilité et contrôle</option>
+                  <option>Droit</option>
+                  <option>Droit des affaires et fiscalité</option>
+                  <option>Economie</option>
+                  <option>Espagnol</option>
+                  <option>Etudes politiques, historiques et internationales</option>
+                  <option>Etudes théologiques</option>
+                  <option>Finance</option>
+                  <option>Français</option>
+                  <option>Géographie</option>
+                  <option>Géologie</option>
+                  <option>Histoire</option>
+                  <option>Histoire de l'art</option>
+                  <option>Histoire et esthétique du cinéma</option>
+                  <option>Informatique pour les Sciences Humaines</option>
+                  <option>Institut de hautes études en administration publique (IDHEAP)</option>
+                  <option>Italien</option>
+                  <option>Langues et civilisations slaves et de l'Asie du Sud</option>
+                  <option>Linguistique</option>
+                  <option>Marketing</option>
+                  <option>Médecine</option>
+                  <option>Opérations</option>
+                  <option>Philosophie</option>
+                  <option>Psychologie</option>
+                  <option>Sciences actuarielles</option>
+                  <option>Sciences criminelles</option>
+                  <option>Sciences de l'environnement</option>
+                  <option>Sciences des religions</option>
+                  <option>Sciences du sport</option>
+                  <option>Sciences Sociales</option>
+                  <option>Stratégie, globalisation et société</option>
+                  <option>Théologie</option>
+                  <option>Tourisme</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Valider</label>
+            <button id="queryButton" type="submit" class="btn btn-secondary" style="width:175%;">Rechercher</button>
+            {{#if query}}
+              <button class="btn btn-primary" id="cancelQuery" style="width:175%;">Annuler</button>
+            {{/if}}
+          </div>
+      </form>
+  </div>
+  <div class="main">
+    <div>
+    <button class="btn btn-info btn-lg" type="button" style="width:90%; margin-bottom: 5%" id="vendreLivre">Vendre mon livre</button>
+    </div>
+    <button class="btn btn-warning" id="myBtn" title="Go to top">Haut de la page</button>
+    <table class="table table-hover overflow-auto" id="tableCatalogue">
+        <thead class="thead-light">
+          <tr>
+            <th scope="col">Couverture</th>
+            <th scope="col">Titre</th>
+            <th scope="col">Auteur</th>
+            <th scope="col">Section</th>
+            <th scope="col">Enseignant/e</th>
+            <th scope="col">Prix</th>
+          </tr>
+        </thead>
+       
+        <tbody>
+          {{#each elements}}
+          <tr class="Default item-row" id="clickRow">
+            <td class="align-middle"> <img src="{{img}}" alt="Pretty picture here" style="width:100%"></td>
+            <td class="align-middle">{{title}}</td>
+            <td class="align-middle">{{author}}</td>
+            <td class="align-middle">{{faculty}}</td>
+            <td class="align-middle">{{teacher}}</td>
+            <td class="align-middle" style="width: 100px">CHF {{price}}</td>
+          </tr>
+          {{/each}}
+        </tbody>
+    </table>
+  </div>
+    <br>
+    <br>
+  {{else}}
+    {{> notLoggedIn}}
+  {{/if}}
+  {{/if}}
+</template>

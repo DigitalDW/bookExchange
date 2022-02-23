@@ -1,0 +1,215 @@
+<!--
+Le formulaire de création d'annonce de livre à vendre
+Les inputs sont renseignées par l'utilisateur.
+Chacun de ces inputs prend l'id "inputXxx".
+-->
+<template name="formVente">
+        {{#if loggingIn}}
+            <div class="loader"></div>
+        {{else}}   
+        {{#if currentUser}}
+            <h1>Nouvelle annonce</h1>
+            <h4>Créer rapidement et facilement une annonce en remplissant les champs suivants:</h4>
+    
+            <br>
+    
+            <form id="formVente">
+                <h5 class="font-weight-bold, text-uppercase">Informations générales</h5>
+                <div class="form-group">
+                    <label>Code EAN</label>
+                    <small id="eanHelp" class="label-group-append text-muted">Nombre du code-barres</small>
+                    <div class="input-group-sm text-muted">
+                        <input type="text" class="form-control" placeholder="Rentrez le code EAN du livre" id="inputEAN" name="inputEAN" value="{{#if ean}}{{ean}}{{/if}}">
+                        <div class="input-group-append">
+                            <button class="btn btn-secondary" id="scanMyId" type="button">Trouver</button>
+                            <button class="btn btn-info" id="returnToScan" type="button">Scanner</button>
+                            <small class="btn-append" id="pubScan">Essayez de scanner directement votre EAN!</small>
+                        </div>
+                    </div>
+                </div>
+    
+                <div class="form-group">
+                    <label>ISBN</label>
+                    <small id="eanHelp" class="label-group-append text-muted">Numéro de série de l'ouvrage</small>
+                    <div class="input-group-sm">
+                        <input type="text" class="form-control" placeholder="Rentrez l'ISBN du livre" name="inputISBN" value="{{#if isbn}}{{isbn}}{{/if}}">
+                    </div>
+                </div>
+    
+                <div class="form-group">
+                    <label>Titre<span style="color: #DC143C"> *</span></label>
+                    <div class="input-group-sm">
+                        <input type="text" class="form-control" placeholder="Rentrez le tite du livre" name="inputTitre" value="{{#if title}}{{title}}{{/if}}">
+                    </div>
+                </div>
+    
+                <div class="form-group">
+                    <label>Auteur<span style="color: #DC143C"> *</span></label>
+                    <div class="input-group-sm">
+                        <input type="text" class="form-control" placeholder="Rentrez l'auteur du livre" name="inputAuteur" value="{{#if author}}{{author}}{{/if}}">
+                    </div>
+                </div>
+    
+                <div class="form-group">
+                    <label>Editeur</label>
+                    <div class="input-group-sm">
+                        <input type="text" class="form-control" placeholder="Rentrez l'éditeur du livre" name="inputEditeur">
+                    </div>
+                </div>
+    
+                <div class="form-group">
+                    <label>Collection</label>
+                    <div class="input-group-sm">
+                        <input type="text" class="form-control" placeholder="Rentrez la collection du livre" name="inputCollection">
+                    </div>
+                </div>
+    
+                <div class="form-group">
+                    <label>Parution</label>
+                    <div class="input-group-sm">
+                        <input type="number" class="form-control" placeholder="Annee de parution" min="-2000" max="{{anneeMax}}" name="inputParution" value="{{#if parution}}{{parution}}{{/if}}">
+                    </div>
+                </div>
+    
+                <br>
+    
+                <h5 class="font-weight-bold, text-uppercase">Informations uniques</h5>
+                <div class="form-row">
+                    <div class="form-group-inline">
+                        <label>Prix<span style="color: #DC143C"> *</span></label>
+                        <div class="input-group-sm">
+                            <input type="number" class="form-control" step="any" placeholder="Prix de vente" min="1" max="999" name="inputPrix" value="{{#if prix}}{{prix}}{{/if}}">
+                        </div>
+                    </div>
+
+                    <div class="form-group-inline">
+                            <label>Etat</label>
+                            <div class="input-group-sm"  style="margin-left:2%;">
+                                <select name="inputEtat" class="form-control-sm">
+                                    <option selected>Neuf</option>
+                                    <option>Comme Neuf</option>
+                                    <option>Surligné</option>
+                                    <option>Légèrement annoté</option>
+                                    <option>Annoté</option>
+                                    <option>Mauvais état</option>
+                                    <option>Que partiellement lisible</option>
+                                </select>
+                            </div>
+                        </div>
+                </div>
+    
+                <div class="form-row">
+
+                    <div class="form-group">
+                        <label>Format</label>
+                        <div class="form-group-inline">
+                            <select id="inputFormat" class="form-control-sm">
+                                <option selected>Autre</option>
+                                <option>Poche (12 x 18cm)</option>
+                                <option>Standard (15 x 21cm)</option>
+                                <option>Carré (17 x 17cm)</option>
+                                <option>Grand (A4)</option>
+                            </select>
+                        </div>
+                    </div>
+    
+
+                    <div class="form-group-inline">&nbsp;&nbsp;&nbsp;&nbsp;</div><!--Creation d'un espace entre les 2 select-->
+    
+                    <div class="form-group-inline">
+                        <label>Genre</label>
+                        <div class="input-group-sm">
+                            <select name="inputGenre" class="form-control-sm">
+                                <option selected>Autre</option>
+                                <option>Aventure</option>
+                                <option>Biographie</option>
+                                <option>Conte</option>
+                                <option>Epopée</option>
+                                <option>Essai</option>
+                                <option>Fantastique</option>
+                                <option>Horreur</option>
+                                <option>Livre de référence</option>
+                                <option>Non-fiction</option>
+                                <option>Nouvelle</option>
+                                <option>Roman</option>
+                                <option>Science-fiction</option>
+                                <option>Témoignage</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+    
+                <div class="form-row">
+                    <div class="form-group-inline">
+                        <label>Section UNIL</label>
+                        <div class="input-group-sm">
+                            <select name="inputFaculte" class="form-control-sm">
+                                <option selected>Autre</option>
+                                <option>Allemand</option>
+                                <option>Anglais</option>
+                                <option>Archéologie et sciences de l'Antiquité</option>
+                                <option>Biologie</option>
+                                <option>Comportement organisationnel</option>
+                                <option>Comptabilité et contrôle</option>
+                                <option>Droit</option>
+                                <option>Droit des affaires et fiscalité</option>
+                                <option>Economie</option>
+                                <option>Espagnol</option>
+                                <option>Etudes politiques, historiques et internationales</option>
+                                <option>Etudes théologiques</option>
+                                <option>Finance</option>
+                                <option>Français</option>
+                                <option>Géographie</option>
+                                <option>Géologie</option>
+                                <option>Histoire</option>
+                                <option>Histoire de l'art</option>
+                                <option>Histoire et esthétique du cinéma</option>
+                                <option>Informatique pour les Sciences Humaines</option>
+                                <option>Institut de hautes études en administration publique (IDHEAP)</option>
+                                <option>Italien</option>
+                                <option>Langues et civilisations slaves et de l'Asie du Sud</option>
+                                <option>Linguistique</option>
+                                <option>Marketing</option>
+                                <option>Médecine</option>
+                                <option>Opérations</option>
+                                <option>Philosophie</option>
+                                <option>Psychologie</option>
+                                <option>Sciences actuarielles</option>
+                                <option>Sciences criminelles</option>
+                                <option>Sciences de l'environnement</option>
+                                <option>Sciences des religions</option>
+                                <option>Sciences du sport</option>
+                                <option>Sciences Sociales</option>
+                                <option>Stratégie, globalisation et société</option>
+                                <option>Théologie</option>
+                                <option>Tourisme</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="form-group" style="padding-top:2%;">
+                    <label>Enseignant/e</label>
+                    <div class="input-group-sm">
+                        <input type="text" class="form-control" placeholder="Exemple: Agatha CHRISTIE" name="inputEnseignant">
+                    </div>
+                </div>
+
+                <small class="form-group" style="color: #DC143C"><span >*</span> Champs obligatoires</small>
+                <br>
+
+                <div class="input-group-append">
+                    <button class="btn btn-secondary btn-lg button-cancel" id="button-cancel" type="button">Annuler</button>
+                    <div class="form-group-inline">&nbsp;&nbsp;&nbsp;&nbsp;</div>
+                    <button class="btn btn-success btn-lg" id="buttonSend" type="submit">Publier</button>
+                </div>
+                <br>
+            </form>
+            <!-- <div class="progress" id="progress">
+                <div class="progress-bar bg-info progress-bar-animated" role="progressbar" aria-valuenow="1" aria-valuemin="0" aria-valuemax="100" style="width: 33%;"></div>
+            </div> -->
+        {{else}}
+            {{> notLoggedIn}}
+        {{/if}}
+        {{/if}}
+    </template>

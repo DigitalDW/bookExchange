@@ -1,0 +1,79 @@
+<!--
+Le "display" de l'annonce du livre.
+-->
+<template name="livre">
+    {{#if loggingIn}}
+        <div class="loader"></div>
+    {{else}}   
+    {{#if currentUser}}
+        <div class="card">
+            <div style="align-self: flex-start">
+            <button style="margin-top: 1%;" class="btn btn-outline-info" id="returnToCatalogueButton" type="button">&lt;&lt; {{#if mesAnnonces}} Retour vers mes annonces {{else}}Retour aux autres annonces{{/if}}</button>
+            </div>
+            <div class="card-body">
+                <h4 class="card-title font-weight-bolder">{{titre}}</h4>
+                <h6 class="card-subtitle mb-2">Par {{auteur}}</h6>
+                <div class="table-responsive">
+                    <table class="table table-sm">
+                        <thead class="thead">
+                            <tr>
+                                <th scope="col">ISBN</th>
+                                <th scope="col">Editeur</th>
+                                <th scope="col">Collection</th>
+                                <th scope="col">Parution</th>
+                                <th scope="col">Format</th>
+                                <th scope="col">Genre</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td scope="row">{{isbn}}</td>
+                                <td scope="row">{{editeur}}</td>
+                                <td scope="row">{{collection}}</td>
+                                <td scope="row">{{parution}}</td>
+                                <td scope="row">{{format}}</td>
+                                <td scope="row">{{genre}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+            </div>
+            <img class="img-fluid" style="width:150px; margin: 0 auto; margin-bottom: 10px" src="{{couverture}}" alt="Responsive image">
+            <div class="table-responsive">
+            <table class="table" style="width: 100%;">
+                    <thead class="thead-light">
+                        <tr>
+                            <th scope="col" class=".th-lg">Prix</th>
+                            <th scope="col" class=".th-lg">Etat</th>
+                            <th scope="col" class=".th-lg">Section</th>
+                            <th scope="col" class=".th-lg">Enseignant</th>
+                            <th scope="col" class=".th-lg">Vendeur</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="Default">
+                            <td scope="row">CHF {{prix}}</td>
+                            <td scope="row">{{etat}}</td>
+                            <td scope="row">{{faculte}}</td>
+                            <td scope="row">{{enseignant}}</td>
+                            <td scope="row">{{vendeur}}</td>
+
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            {{#if vendeurIsHere}}
+                <button  style="margin-bottom: 1%;" class="btn btn-success btn-lg" id="purchaseButton" type="button">Acheter</button>
+            {{/if}}
+
+            <div class="card-footer text-muted">
+                Annonce postée le {{postee}}
+            </div>
+        </div>
+    {{else}}
+        {{> notLoggedIn}}
+    {{/if}}
+    {{/if}}
+</template>

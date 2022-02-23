@@ -1,4 +1,19 @@
-<template name="vente">
-    {{> header}}
-    {{> detection}}
+<!--
+Detection de l'ISBN
+-->
+<template name="scan">
+    {{#if loggingIn}}
+        <div class="loader"></div>
+    {{else}}   
+    {{#if currentUser}}
+        <div>
+            <h1>Vendre</h1>
+            {{> detection}}
+        </div>
+        <button class="btn btn-primary boutonLoris" id="retourScan">Passer au formulaire</button>
+        <p style="font-size:85%">Nous ne scannerez pas votre isbn et entrerez les informations du livre à la main</p>
+    {{else}}
+        {{> notLoggedIn}}
+    {{/if}}
+    {{/if}}
 </template>

@@ -1,0 +1,45 @@
+<!--
+La page où l'utilisateur voit les annonces qu'il a postées
+-->
+<template name="mesAnnonces">
+  {{#if loggingIn}}
+    <div class="loader"></div>
+  {{else}}   
+  {{#if currentUser}}
+    <button class="btn btn-warning" id="myBtn" title="Go to top">Haut de la page</button>
+    <table class="table table-hover overflow-auto" id="tableCatalogue">
+        <thead class="thead-light">
+          <tr>
+            <th scope="col">Action</th>
+            <th scope="col">Couverture</th>
+            <th scope="col">Titre</th>
+            <th scope="col">Section</th>
+            <th scope="col">Etat</th>
+            <th scope="col">Enseignant/e</th>
+            <th scope="col">Prix</th>
+          </tr>
+        </thead>
+       
+        <tbody>
+          {{#each elements}}
+          <tr class="Default item-row" id="clickRow">
+            <td>
+                <button class="deleteButton btn btn-danger">Supprimer</button>
+                <button id="buttonChange" class="changeButton btn btn-info">Modifier</button>
+            </td>
+            <td class="align-middle"><img src="{{img}}" alt="Pretty picture here" style="width:100%"></td>
+            <td class="align-middle">{{title}}</td>
+            <td class="align-middle">{{faculty}}</td>
+            <td class="align-middle">{{condition}}</td>
+            <td class="align-middle">{{teacher}}</td>
+            <td class="align-middle" style="width: 100px">CHF {{price}}</td>
+          </tr>
+          {{/each}}
+        </tbody>
+    </table>
+  {{else}}
+    {{> notLoggedIn}}
+  {{/if}}
+  {{/if}}
+
+</template>

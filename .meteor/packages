@@ -26,3 +26,6 @@ kadira:flow-router
 zimme:active-route
 kadira:blaze-layout
 http
+accounts-base
+accounts-password
+email

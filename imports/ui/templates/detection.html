@@ -1,4 +1,23 @@
+<!--
+La détection de la caméra
+-->
 <template name="detection">
     <div id="barcode-scanner"></div>
-    <button id="click">click</button>
+    <div style="margin-top: 1%; margin-bottom: 2%" id="progressBar">
+    {{#if joueVideo}}
+    {{/if}}
+    </div>
+    <button type="button" class="btn btn-secondary boutonLoris" id="scanISBN">
+        {{#if joueVideo}}
+            Interrompre
+        {{else}}
+            Scanner mon ISBN
+        {{/if}}
+    </button>
+    <br>
+    {{#if joueVideo}}
+        <small>Appuyez sur le bouton pour arrêter le scan</small>
+    {{else}}
+        <small>Appuyez sur le bouton pour scanner votre ISBN !</small>
+    {{/if}}
 </template>
